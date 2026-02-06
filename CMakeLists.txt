@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 project(Undercore)
 
-add_library(glad STATIC glad/src/glad.c)
+set(OpenGL_GL_PREFERENCE GLVND)
 
-target_include_directories(glad PUBLIC ${CMAKE_SOURCE_DIR}/glad/include)
+add_library(glad STATIC glad/src/glad.c)
+target_include_directories(glad PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/glad/include)
 
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
@@ -27,7 +28,7 @@ src/shader.cpp)
 
 add_library(${PROJECT_NAME} STATIC ${Camera_src} ${Geometry_src} ${Texture_src} ${Window_src} ${Other_src})
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include/)
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     glm::glm

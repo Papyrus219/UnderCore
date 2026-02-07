@@ -70,19 +70,19 @@ void undercore::Window::Create(std::string title, unsigned int width, unsigned i
     glEnable(GL_DEPTH_TEST);
 }
 
-void undercore::Window::Clear()
+void undercore::Window::Clear() noexcept
 {
     glClearColor(0.0, 0.0, 1.0, 1.0);
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 }
 
-void undercore::Window::Display()
+void undercore::Window::Display() noexcept
 {
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
 
-std::optional<Event> undercore::Window::Poll_event()
+std::optional<Event> undercore::Window::Poll_event() noexcept
 {
     std::optional<Event> event{};
     if(events_queue.empty()) return event;
@@ -98,7 +98,7 @@ void undercore::Window::Framebuffer_size_callback([[maybe_unused]] GLFWwindow* w
     glViewport(0,0, width, height);
 }
 
-void undercore::Window::Colect_events()
+void undercore::Window::Colect_events() noexcept
 {
     if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
     {
@@ -293,3 +293,4 @@ void undercore::Window::Colect_events()
         events_queue.emplace(Keyboard::LEFT);
     }
 }
+

@@ -6,15 +6,59 @@
 namespace undercore
 {
 
+///@brief Implementation of Camera (flying).
 class Fly_camera : public Camera
 {
 public:
-    Fly_camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH);
-    Fly_camera(float pos_x, float pos_y, float pos_z, float up_x, float up_y, float up_z, float yaw_, float pitch_);
+    /**
+     * @name Constructors
+     * @{
+     */
 
-    void Process_keyboard(Camera_movement direction, float delta_time) override;
+    /**
+     * @param [in] possition_   Start position of a camera.
+     * @param [in] up_      Up direction of world.
+     * @param [in] yaw_     x axis rotation euler angle.
+     * @param [in] pitch_   y axis rotation euler angle.
+     */
+    Fly_camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) noexcept;
 
-    virtual ~Fly_camera() = default;
+    /**
+     * @param [in] pos_x    Start position x of a camera.
+     * @param [in] pos_y    Start position y of a camera.
+     * @param [in] pos_z    Start position z of a camera.
+     * @param [in] up_x     Up x direction of world.
+     * @param [in] up_y     Up y direction of world.
+     * @param [in] up_z     Up z direction of world.
+     * @param [in] yaw_     x axis rotation euler angle.
+     * @param [in] pitch_   y axis rotation euler angle.
+     */
+    Fly_camera(float pos_x, float pos_y, float pos_z, float up_x, float up_y, float up_z, float yaw_, float pitch_) noexcept;
+
+    ///@}
+
+    /**
+     * @name Input_processing
+     * @{
+     */
+
+    /**
+     * @brief Implementation form Camera class.
+     * @param [in] direction    Direction in wich camera move.
+     * @param [in] delta_time   Time passed since last update.
+     */
+    void Process_keyboard(Camera_movement direction, float delta_time) noexcept override;
+
+    ///@}
+
+    /**
+     * @name Destructor
+     * @{
+     */
+
+    virtual ~Fly_camera() noexcept = default;
+
+    ///@}
 };
 
 }

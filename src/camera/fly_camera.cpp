@@ -2,17 +2,17 @@
 
 using namespace undercore;
 
-Fly_camera::Fly_camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch): Camera{position, up, yaw, pitch}
+Fly_camera::Fly_camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) noexcept: Camera{position, up, yaw, pitch}
 {
 
 }
 
-Fly_camera::Fly_camera(float pos_x, float pos_y, float pos_z, float up_x, float up_y, float up_z, float yaw_, float pitch_): Camera{pos_x,pos_y, pos_z, up_x, up_y, up_z, yaw_, pitch_}
+Fly_camera::Fly_camera(float pos_x, float pos_y, float pos_z, float up_x, float up_y, float up_z, float yaw_, float pitch_) noexcept: Camera{pos_x,pos_y, pos_z, up_x, up_y, up_z, yaw_, pitch_}
 {
 
 }
 
-void Fly_camera::Process_keyboard(Camera_movement direction, float delta_time)
+void Fly_camera::Process_keyboard(Camera_movement direction, float delta_time) noexcept
 {
     float velocity = movement_speed * delta_time;
     switch(direction)

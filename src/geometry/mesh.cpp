@@ -3,12 +3,12 @@
 
 using namespace undercore;
 
-undercore::Mesh::Mesh(std::vector<Vertex> vertices_, std::vector<unsigned int> indices_): vertices{vertices_}, indices{indices_}
+undercore::Mesh::Mesh(std::vector<Vertex> vertices_, std::vector<unsigned int> indices_) noexcept: vertices{vertices_}, indices{indices_}
 {
     Buffer_data();
 }
 
-undercore::Mesh::Mesh(Primitive primite)
+undercore::Mesh::Mesh(Primitive primite) noexcept
 {
     switch(primite)
     {
@@ -23,13 +23,18 @@ undercore::Mesh::Mesh(Primitive primite)
     Buffer_data();
 }
 
-void undercore::Mesh::Draw()
+void undercore::Mesh::Draw() const noexcept
 {
     glBindVertexArray(this->vao);
     glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
 }
 
-void undercore::Mesh::Buffer_data()
+/**
+ * @details
+ * It, take data feom vertecies and indices, and buffer it into vbo and ebo, also binding them to vao.
+ * It also set how to find data in GPU.
+ */
+void undercore::Mesh::Buffer_data() noexcept
 {
     glBindVertexArray(this->vao);
 
@@ -51,19 +56,19 @@ void undercore::Mesh::Buffer_data()
     glBindVertexArray(0);
 }
 
-void undercore::Mesh::Gen_cube_primitive()
+void undercore::Mesh::Gen_cube_primitive() noexcept
 {
     this->vertices = {
     {}
     };
 }
 
-void undercore::Mesh::Gen_sphere_primitive()
+void undercore::Mesh::Gen_sphere_primitive() noexcept
 {
 
 }
 
-undercore::Mesh::~Mesh()
+undercore::Mesh::~Mesh() noexcept
 {
     glDeleteBuffers(1, &vbo);
     glDeleteBuffers(1, &ebo);

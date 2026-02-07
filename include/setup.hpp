@@ -8,6 +8,7 @@
 namespace undercore
 {
 
+///@brief Struct existing to setup and clean glfw.
 struct Setup
 {
     Setup()
@@ -24,6 +25,7 @@ struct Setup
     }
 };
 
+///@brief This object exist to call setup constructor and destructor (At program beginning and end respectively).
 extern Setup setup;
 
 }

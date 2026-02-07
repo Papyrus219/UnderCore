@@ -6,6 +6,12 @@
 namespace undercore
 {
 
+/**
+ * @brief Struct that represent material texture.
+ *
+ * @details
+ * It simplify process of applying material on shader.
+ */
 struct Material_texture
 {
     Texture diffuse_texture{};

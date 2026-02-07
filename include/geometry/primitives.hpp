@@ -4,6 +4,7 @@
 namespace undercore
 {
 
+///@brief Enum class listing the available primitives.
 enum class Primitive
 {
     CUBE,

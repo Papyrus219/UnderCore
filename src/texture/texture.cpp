@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 #include <iostream>
 
-undercore::Texture::Texture(std::filesystem::path path, Texture_type type)
+undercore::Texture::Texture(std::filesystem::path path, Texture_type type) noexcept
 {
     glGenTextures(1, &this->id);
     glBindTexture(GL_TEXTURE_2D, this->id);
@@ -89,7 +89,7 @@ void undercore::Texture::Load_from_file(std::filesystem::path path, Texture_type
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-std::string undercore::Texture_type_to_string(Texture_type type)
+std::string undercore::Texture_type_to_string(Texture_type type) noexcept
 {
     switch(type)
     {

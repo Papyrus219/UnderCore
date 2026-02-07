@@ -3,3 +3,5 @@ build/
 kdev4/
 .kdev4/
 *.[kdev4]
+Doxyfile
+html/

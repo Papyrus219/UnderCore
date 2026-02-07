@@ -2,17 +2,17 @@
 
 using namespace undercore;
 
-Camera::Camera(glm::vec3 possition_, glm::vec3 up_, float yaw_, float pitch_): possition{possition_}, front{0.0f,0.0f, -1.0f}, world_up{up_}, yaw{yaw_}, pitch{pitch_}, movement_speed{SPEED}, mouse_sensivity{SENITIVITY}, zoom{ZOOM}
+Camera::Camera(glm::vec3 possition_, glm::vec3 up_, float yaw_, float pitch_) noexcept: possition{possition_}, front{0.0f,0.0f, -1.0f}, world_up{up_}, yaw{yaw_}, pitch{pitch_}, movement_speed{SPEED}, mouse_sensivity{SENITIVITY}, zoom{ZOOM}
 {
     Update_camera_vectors();
 }
 
-Camera::Camera(float pos_x, float pos_y, float pos_z, float up_x, float up_y, float up_z, float yaw_, float pitch_): possition{pos_x, pos_y, pos_z}, front{0.0f, 0.0f, -1.0f}, world_up{up_x, up_y, up_z}, yaw{yaw_}, pitch{pitch_}, movement_speed{SPEED}, mouse_sensivity{SENITIVITY}, zoom{ZOOM}
+Camera::Camera(float pos_x, float pos_y, float pos_z, float up_x, float up_y, float up_z, float yaw_, float pitch_) noexcept: possition{pos_x, pos_y, pos_z}, front{0.0f, 0.0f, -1.0f}, world_up{up_x, up_y, up_z}, yaw{yaw_}, pitch{pitch_}, movement_speed{SPEED}, mouse_sensivity{SENITIVITY}, zoom{ZOOM}
 {
     Update_camera_vectors();
 }
 
-void Camera::Process_mouse_movement(float x_offset, float y_offset, bool constrain_pitch)
+void Camera::Process_mouse_movement(float x_offset, float y_offset, bool constrain_pitch) noexcept
 {
     x_offset *= mouse_sensivity;
     y_offset *= mouse_sensivity;
@@ -30,14 +30,18 @@ void Camera::Process_mouse_movement(float x_offset, float y_offset, bool constra
 }
 
 
-void Camera::Process_mouse_scroll(float y_offset)
+void Camera::Process_mouse_scroll(float y_offset) noexcept
 {
     zoom -= (float)y_offset;
     if(zoom < 1.0f) zoom = 1.0f;
     if(zoom > 45.0f) zoom = 45.0f;
 }
 
-void Camera::Update_camera_vectors()
+/**
+ * @details
+ * It calculate front, right, and up vector after inicialization or mouse movement.
+ */
+void Camera::Update_camera_vectors() noexcept
 {
     glm::vec3 front{};
     front.x = std::cos(glm::radians(yaw)) * std::cos(glm::radians(pitch));

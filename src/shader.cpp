@@ -82,67 +82,67 @@ void Shader::Use()
     glUseProgram(id);
 }
 
-void Shader::Set_bool(const std::string& name, bool value) const
+void Shader::Set_bool(const std::string& name, bool value) noexcept
 {
     glUniform1i( glGetUniformLocation(id, name.c_str()), static_cast<int>(value) );
 }
 
-void Shader::Set_int(const std::string& name, int value) const
+void Shader::Set_int(const std::string& name, int value) noexcept
 {
     glUniform1i( glGetUniformLocation(id, name.c_str()), value );
 }
 
-void Shader::Set_float(const std::string& name, float value) const
+void Shader::Set_float(const std::string& name, float value) noexcept
 {
     glUniform1f( glGetUniformLocation(id, name.c_str()), value );
 }
 
-void Shader::Set_vec2(const std::string& name, const glm::vec2 vector)
+void Shader::Set_vec2(const std::string& name, const glm::vec2 vector) noexcept
 {
     glUniform2fv( glGetUniformLocation(id, name.c_str()), 1, &vector[0] );
 }
 
-void Shader::Set_vec2(const std::string& name, int x, int y)
+void Shader::Set_vec2(const std::string& name, int x, int y) noexcept
 {
     glUniform2f( glGetUniformLocation(id, name.c_str()), x, y);
 }
 
-void Shader::Set_vec3(const std::string& name, const glm::vec3 vector)
+void Shader::Set_vec3(const std::string& name, const glm::vec3 vector) noexcept
 {
     glUniform3fv( glGetUniformLocation(id, name.c_str()), 1, &vector[0] );
 }
 
-void Shader::Set_vec3(const std::string& name, int x, int y, int z)
+void Shader::Set_vec3(const std::string& name, int x, int y, int z) noexcept
 {
     glUniform3f( glGetUniformLocation(id, name.c_str()), x, y, z);
 }
 
-void Shader::Set_vec4(const std::string& name, const glm::vec4 vector)
+void Shader::Set_vec4(const std::string& name, const glm::vec4 vector) noexcept
 {
     glUniform2fv( glGetUniformLocation(id, name.c_str()), 1, &vector[0] );
 }
 
-void Shader::Set_vec4(const std::string& name, int x, int y, int z, int w)
+void Shader::Set_vec4(const std::string& name, int x, int y, int z, int w) noexcept
 {
     glUniform4f( glGetUniformLocation(id, name.c_str()), x, y, z, w);
 }
 
-void Shader::Set_matrix2(const std::string& name, const glm::mat2 matrix)
+void Shader::Set_matrix2(const std::string& name, const glm::mat2 matrix) noexcept
 {
     glUniformMatrix2fv( glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &matrix[0][0] );
 }
 
-void Shader::Set_matrix3(const std::string& name, const glm::mat3 matrix)
+void Shader::Set_matrix3(const std::string& name, const glm::mat3 matrix) noexcept
 {
     glUniformMatrix3fv( glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &matrix[0][0] );
 }
 
-void Shader::Set_matrix4(const std::string& name, const glm::mat4 matrix)
+void Shader::Set_matrix4(const std::string& name, const glm::mat4 matrix) noexcept
 {
     glUniformMatrix4fv( glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &matrix[0][0] );
 }
 
-void Shader::Set_Material(const Material_texture& material)
+void Shader::Set_Material(const Material_texture& material) noexcept
 {
     Set_int("material.diffuse", 0);
     Set_int("material.specular", 1);
@@ -154,4 +154,9 @@ void Shader::Set_Material(const Material_texture& material)
     glBindTexture(GL_TEXTURE_2D, material.speculat_texture.Get_id());
 
     Set_float("material.shiness", material.shiness);
+}
+
+Shader::~Shader() noexcept
+{
+    glDeleteShader(id);
 }

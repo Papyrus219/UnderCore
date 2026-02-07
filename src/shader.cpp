@@ -1,4 +1,4 @@
-#include "../../include/shader.hpp"
+#include "../include/shader.hpp"
 
 using namespace undercore;
 

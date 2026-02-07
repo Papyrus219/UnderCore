@@ -3,12 +3,19 @@ project(UnderCore)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 
-add_library(glad STATIC glad/src/glad.c)
-target_include_directories(glad PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/glad/include)
-
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
+
+include(FetchContent)
+
+FetchContent_Declare(
+    glad
+    GIT_REPOSITORY https://github.com/Dav1dde/glad.git
+    GIT_TAG v0.1.36
+)
+
+FetchContent_MakeAvailable(glad)
 
 set(Camera_src src/camera/camera.cpp
 src/camera/fly_camera.cpp
